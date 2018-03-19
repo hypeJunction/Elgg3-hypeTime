@@ -1,0 +1,28 @@
+{
+	"name": "hypejunction/hypetime",
+	"type": "elgg-plugin",
+	"description": "Utilities for working with dates and time",
+	"homepage": "http://hypejunction.com",
+	"keywords": [
+		"elgg", "plugin", "time", "date"
+	],
+	"license": "GPL-2.0-only",
+	"authors": [
+		{
+			"name": "Ismayil Khayredinov",
+			"email": "info@hypejunction.com"
+		}
+	],
+	"extra": {
+		"installer-name": "hypeTime"
+	},
+	"require": {
+		"php": ">=7.0",
+		"composer/installers": "~1.0"
+	},
+	"autoload": {
+		"psr-0": {
+			"": "classes/"
+		}
+	}
+}
