@@ -1,3 +1,13 @@
+<a name="1.0.1"></a>
+## [1.0.1](https://github.com/hypeJunctionPro/Elgg3-hypeTime/compare/1.0.0...1.0.1) (2018-03-28)
+
+
+### Bug Fixes
+
+* **fields:** sync with new fields API ([1746675](https://github.com/hypeJunctionPro/Elgg3-hypeTime/commit/1746675))
+
+
+
 <a name="1.0.0"></a>
 # 1.0.0 (2018-03-19)
 
