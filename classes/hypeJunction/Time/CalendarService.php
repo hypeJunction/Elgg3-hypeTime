@@ -7,7 +7,7 @@ use DateTime;
 use DateTimeZone;
 use hypeJunction\Time;
 
-class Post {
+class CalendarService {
 
 	/**
 	 * Set starting date
