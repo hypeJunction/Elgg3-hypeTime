@@ -2,12 +2,22 @@
 
 namespace hypeJunction\Time;
 
+use Elgg\Di\ServiceFacade;
 use ElggEntity;
 use DateTime;
 use DateTimeZone;
 use hypeJunction\Time;
 
 class CalendarService {
+
+	use ServiceFacade;
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function name() {
+		return 'posts.calendar';
+	}
 
 	/**
 	 * Set starting date
