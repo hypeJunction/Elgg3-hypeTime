@@ -1,3 +1,13 @@
+<a name="1.1.1"></a>
+## [1.1.1](https://github.com/hypeJunctionPro/Elgg3-hypeTime/compare/1.1.0...1.1.1) (2018-11-12)
+
+
+### Bug Fixes
+
+* **deps:** remove circular dependency on hypePost ([3858403](https://github.com/hypeJunctionPro/Elgg3-hypeTime/commit/3858403))
+
+
+
 <a name="1.1.0"></a>
 # [1.1.0](https://github.com/hypeJunctionPro/Elgg3-hypeTime/compare/1.0.0...1.1.0) (2018-06-29)
 
