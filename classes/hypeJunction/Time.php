@@ -386,7 +386,7 @@ class Time {
 		}
 
 		if ($filter) {
-			return elgg_trigger_plugin_hook('timezones', 'system', null, $defaults);
+			return elgg_trigger_event_results('timezones', 'system', null, $defaults);
 		}
 
 		return $defaults;
@@ -537,10 +537,10 @@ class Time {
 		}
 
 		if ($entity instanceof ElggUser) {
-			$preferred[] = elgg_get_plugin_user_setting('timezone', $entity->guid, 'hypeTime');
+			$preferred[] = elgg_get_plugin_user_setting('timezone', $entity->guid, 'hypetime');
 		}
 
-		$preferred[] = elgg_get_plugin_setting('timezone', 'hypeTime');
+		$preferred[] = elgg_get_plugin_setting('timezone', 'hypetime');
 
 		if (defined('ELGG_SITE_TIMEZONE')) {
 			$preferred[] = ELGG_SITE_TIMEZONE;

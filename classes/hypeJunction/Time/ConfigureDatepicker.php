@@ -23,9 +23,9 @@ class ConfigureDatepicker {
 		if (!isset($options['firstDay'])) {
 			$user = elgg_get_logged_in_user_entity();
 			if ($user) {
-				$setting = elgg_get_plugin_user_setting('week:starts', $user->guid, 'hypeTime');
+				$setting = elgg_get_plugin_user_setting('week:starts', $user->guid, 'hypetime');
 			} else {
-				$setting = elgg_get_plugin_setting('week:starts', 'hypeTime');
+				$setting = elgg_get_plugin_setting('week:starts', 'hypetime');
 			}
 
 			if ($setting === Time::SUNDAY) {

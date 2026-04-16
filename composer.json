@@ -14,15 +14,15 @@
 		}
 	],
 	"extra": {
-		"installer-name": "hypeTime"
+		"installer-name": "hypetime"
 	},
 	"require": {
 		"php": ">=7.0",
 		"composer/installers": "~1.0"
 	},
 	"autoload": {
-		"psr-0": {
-			"": "classes/"
+		"psr-4": {
+			"hypeJunction\\": "classes/hypeJunction/"
 		}
 	}
 }

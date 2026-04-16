@@ -35,10 +35,11 @@ class SetUserPreferences {
 			'week_starts' => 'week:starts',
 		];
 
+		$plugin = elgg_get_plugin_from_id('hypetime');
 		foreach ($settings as $input => $setting) {
 			$value = get_input($input);
 			if (isset($value)) {
-				elgg_set_plugin_user_setting($setting, $value, $user->guid, 'hypeTime');
+				$plugin->setUserSetting($setting, $value, $user->guid);
 			}
 		}
 	}
