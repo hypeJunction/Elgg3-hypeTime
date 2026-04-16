@@ -1,5 +1,5 @@
 <?php
 
 return [
-	'posts.calendar' => \DI\object(\hypeJunction\Time\CalendarService::class),
+	'posts.calendar' => \DI\create(\hypeJunction\Time\CalendarService::class),
 ];
