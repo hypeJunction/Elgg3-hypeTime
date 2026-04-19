@@ -4,7 +4,10 @@
 	"description": "Utilities for working with dates and time",
 	"homepage": "http://hypejunction.com",
 	"keywords": [
-		"elgg", "plugin", "time", "date"
+		"elgg",
+		"plugin",
+		"time",
+		"date"
 	],
 	"license": "proprietary",
 	"authors": [
@@ -14,15 +17,24 @@
 		}
 	],
 	"extra": {
-		"installer-name": "hypetime"
+		"installer-name": "hypetime",
+		"elgg-plugin": {
+			"id": "hypetime"
+		}
 	},
 	"require": {
-		"php": ">=7.0",
-		"composer/installers": "~1.0"
+		"php": ">=7.4",
+		"composer/installers": "^2.0",
+		"elgg/elgg": "^4.0"
 	},
 	"autoload": {
 		"psr-4": {
 			"hypeJunction\\": "classes/hypeJunction/"
+		}
+	},
+	"config": {
+		"allow-plugins": {
+			"composer/installers": true
 		}
 	}
 }
