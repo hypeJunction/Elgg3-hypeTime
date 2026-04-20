@@ -2,35 +2,11 @@
 
 namespace hypeJunction;
 
-use Elgg\PluginBootstrap;
+use Elgg\DefaultPluginBootstrap;
 
-class Bootstrap extends PluginBootstrap {
+class Bootstrap extends DefaultPluginBootstrap {
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function load() {
-
-	}
-
-	/**
-	 * {@inheritdoc}
-	 */
-	public function boot() {
-
-	}
-
-	/**
-	 * {@inheritdoc}
-	 */
-	public function init() {
-		elgg_extend_view('elgg.css', 'input/timezone.css');
-		elgg_extend_view('forms/usersettings/save', 'core/settings/account/time');
-
-		elgg_register_plugin_hook_handler('usersettings:save', 'user', \hypeJunction\Time\SetUserPreferences::class);
-		elgg_register_plugin_hook_handler('view_vars', 'input/date', \hypeJunction\Time\ConfigureDatepicker::class);
-		elgg_register_plugin_hook_handler('fields', 'object', \hypeJunction\Time\AddFormField::class);
-
+	public function init(): void {
 		$user = elgg_get_logged_in_user_entity();
 		if ($user) {
 			$date_format = elgg_get_plugin_user_setting('format:date', $user->guid, 'hypetime');
@@ -43,40 +19,5 @@ class Bootstrap extends PluginBootstrap {
 		elgg_set_config('date_format', $date_format);
 		elgg_set_config('date_format_datepicker', \hypeJunction\Time::mapJsDateFormat($date_format));
 		elgg_set_config('time_format', $time_format);
-	}
-
-	/**
-	 * {@inheritdoc}
-	 */
-	public function ready() {
-
-	}
-
-	/**
-	 * {@inheritdoc}
-	 */
-	public function shutdown() {
-
-	}
-
-	/**
-	 * {@inheritdoc}
-	 */
-	public function activate() {
-
-	}
-
-	/**
-	 * {@inheritdoc}
-	 */
-	public function deactivate() {
-
-	}
-
-	/**
-	 * {@inheritdoc}
-	 */
-	public function upgrade() {
-
 	}
 }
