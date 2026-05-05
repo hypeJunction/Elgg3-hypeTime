@@ -9,8 +9,16 @@ use ElggEntity;
 use hypeJunction\Fields\Field;
 use Symfony\Component\HttpFoundation\ParameterBag;
 
+/**
+ * Calendar start date/time field for entity forms.
+ */
 class CalendarStartField extends Field {
 
+	/**
+	 * @param ElggEntity  $entity  Entity
+	 * @param string|null $context Context
+	 * @return bool
+	 */
 	public function isVisible(ElggEntity $entity, $context = null) {
 		$params = [
 			'entity' => $entity,
@@ -30,6 +38,11 @@ class CalendarStartField extends Field {
 		return parent::isVisible($entity, $context);
 	}
 
+	/**
+	 * @param Request    $request Request
+	 * @param ElggEntity $entity  Entity
+	 * @return \DateTime|null
+	 */
 	public function raw(Request $request, ElggEntity $entity) {
 		$value = $request->getParam('calendar_start', []);
 		$timezone = elgg_extract('timezone', $value, get_input('timezone'));
@@ -50,6 +63,11 @@ class CalendarStartField extends Field {
 		return new DateTime($time, $tz);
 	}
 
+	/**
+	 * @param ElggEntity   $entity     Entity
+	 * @param ParameterBag $parameters Parameters
+	 * @return bool
+	 */
 	public function save(ElggEntity $entity, ParameterBag $parameters) {
 		$value = $parameters->get($this->name);
 
@@ -60,6 +78,10 @@ class CalendarStartField extends Field {
 		return $svc->setCalendarStart($entity, $value);
 	}
 
+	/**
+	 * @param ElggEntity $entity Entity
+	 * @return mixed
+	 */
 	public function retrieve(ElggEntity $entity) {
 		$svc = elgg()->{'posts.calendar'};
 

@@ -11,3 +11,5 @@ robots.txt
 composer.lock
 Gemfile.lock
 yarn.lock
+docker/.env
+tests/.phpunit.result.cache

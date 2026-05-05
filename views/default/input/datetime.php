@@ -14,7 +14,9 @@ if (is_array($value)) {
 	$time = elgg_extract('time', $value);
 	$timezone = elgg_extract('timezone', $value);
 } else {
-	$date = $time = $timezone = $value;
+	$date = $value;
+	$time = $value;
+	$timezone = $value;
 }
 
 $fields = [

@@ -1,3 +1,23 @@
+<a name="4.0.0"></a>
+# [4.0.0] (2026-05-05)
+
+### Breaking Changes
+
+* **elgg:** requires Elgg 4.x; drops Elgg 3.x support
+* **api:** `ElggPlugin::setUserSetting()` removed upstream; `SetUserPreferences` now calls `ElggUser::setPluginSetting()` directly
+* **start.php** and **manifest.xml** removed; all registration is declarative via `elgg-plugin.php`
+
+### Bug Fixes
+
+* **timezones:** replace `elgg_trigger_event_results()` (5.x API) with `elgg_trigger_plugin_hook()` (correct 4.x API)
+
+### Improvements
+
+* **bootstrap:** date/time config is set via `Bootstrap::init()` using the declarative bootstrap pattern
+* **style:** code style updated to Elgg 4.x coding standards
+
+---
+
 <a name="1.1.1"></a>
 ## [1.1.1](https://github.com/hypeJunctionPro/Elgg3-hypeTime/compare/1.1.0...1.1.1) (2018-11-12)
 

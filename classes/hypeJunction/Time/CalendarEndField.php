@@ -9,8 +9,16 @@ use ElggEntity;
 use hypeJunction\Fields\Field;
 use Symfony\Component\HttpFoundation\ParameterBag;
 
+/**
+ * Calendar end date/time field for entity forms.
+ */
 class CalendarEndField extends Field {
 
+	/**
+	 * @param ElggEntity  $entity  Entity
+	 * @param string|null $context Context
+	 * @return bool
+	 */
 	public function isVisible(ElggEntity $entity, $context = null) {
 		$params = [
 			'entity' => $entity,
@@ -30,6 +38,11 @@ class CalendarEndField extends Field {
 		return parent::isVisible($entity, $context);
 	}
 
+	/**
+	 * @param Request    $request Request
+	 * @param ElggEntity $entity  Entity
+	 * @return \DateTime|null
+	 */
 	public function raw(Request $request, ElggEntity $entity) {
 		$value = $request->getParam('calendar_end', []);
 		$timezone = elgg_extract('timezone', $value, get_input('timezone'));
@@ -50,6 +63,11 @@ class CalendarEndField extends Field {
 		return new DateTime($time, $tz);
 	}
 
+	/**
+	 * @param ElggEntity   $entity     Entity
+	 * @param ParameterBag $parameters Parameters
+	 * @return bool
+	 */
 	public function save(ElggEntity $entity, ParameterBag $parameters) {
 		$value = $parameters->get($this->name);
 		$svc = elgg()->{'posts.calendar'};
@@ -59,6 +77,10 @@ class CalendarEndField extends Field {
 		return $svc->setCalendarEnd($entity, $value);
 	}
 
+	/**
+	 * @param ElggEntity $entity Entity
+	 * @return mixed
+	 */
 	public function retrieve(ElggEntity $entity) {
 		$svc = elgg()->{'posts.calendar'};
 

@@ -6,6 +6,9 @@ use Elgg\Http\ResponseBuilder;
 use Elgg\Request;
 use hypeJunction\Time;
 
+/**
+ * Route controller for the /data/timezones endpoint.
+ */
 class TimezoneProvider {
 
 	/**

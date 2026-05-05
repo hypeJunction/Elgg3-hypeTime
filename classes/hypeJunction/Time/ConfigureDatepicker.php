@@ -5,6 +5,9 @@ namespace hypeJunction\Time;
 use Elgg\Hook;
 use hypeJunction\Time;
 
+/**
+ * Injects week-start setting into datepicker view_vars.
+ */
 class ConfigureDatepicker {
 
 	/**
@@ -38,6 +41,5 @@ class ConfigureDatepicker {
 		$vars['datepicker_options'] = $options;
 
 		return $vars;
-
 	}
 }

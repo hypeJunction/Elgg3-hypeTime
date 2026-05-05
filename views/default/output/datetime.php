@@ -14,4 +14,5 @@ try {
 	$dt = \Elgg\Values::normalizeTime($value);
 	echo $dt->format($format);
 } catch (DataFormatException $ex) {
+	// Invalid value — output nothing
 }

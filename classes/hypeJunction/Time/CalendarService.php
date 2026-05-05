@@ -7,6 +7,9 @@ use DateTime;
 use DateTimeZone;
 use hypeJunction\Time;
 
+/**
+ * Service for managing calendar start/end metadata on entities.
+ */
 class CalendarService {
 
 	/**

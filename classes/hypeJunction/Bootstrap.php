@@ -4,8 +4,14 @@ namespace hypeJunction;
 
 use Elgg\DefaultPluginBootstrap;
 
+/**
+ * Plugin bootstrap: sets date/time format config on init.
+ */
 class Bootstrap extends DefaultPluginBootstrap {
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function init(): void {
 		$user = elgg_get_logged_in_user_entity();
 		if ($user) {

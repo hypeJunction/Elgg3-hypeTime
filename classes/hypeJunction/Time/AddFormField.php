@@ -9,6 +9,9 @@ use Elgg\Request;
 use ElggEntity;
 use hypeJunction\Fields\Collection;
 
+/**
+ * Adds calendar and timezone fields to entity forms.
+ */
 class AddFormField {
 
 	/**
