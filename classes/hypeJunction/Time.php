@@ -8,6 +8,9 @@ use ElggEntity;
 use ElggUser;
 use stdClass;
 
+/**
+ * Date/time utilities: day/month boundaries, timezone handling, and JS format mapping.
+ */
 class Time {
 
 	/**
@@ -33,23 +36,24 @@ class Time {
 	 * Timezones
 	 */
 	const UTC = 'UTC';
-	const TIMEZONE_FORMAT_FULL = "\(\G\M\TP\) e - H:i T";
-	const TIMEZONE_FORMAT_ABBR = "T";
-	const TIMEZONE_FORMAT_NAME = "e";
+	const TIMEZONE_FORMAT_FULL = '\(\G\M\TP\) e - H:i T';
+	const TIMEZONE_FORMAT_ABBR = 'T';
+	const TIMEZONE_FORMAT_NAME = 'e';
 	const TIMEZONE_SORT_ALPHA = 'alpha';
 	const TIMEZONE_SORT_OFFSET = 'offset';
 
 	/**
 	 * Returns a timestamp for 0:00:00 of the date of the time
 	 *
-	 * @param mixed  $ts     Date/time value
-	 * @param string $format Format of the return value
+	 * @param mixed       $ts     Date/time value
+	 * @param string      $format Format of the return value
+	 * @param string|null $tz     Timezone identifier
 	 *
 	 * @return string
 	 */
 	public static function getDayStart($ts = 'now', $format = 'U', $tz = null) {
-		if (!Time::isValidTimezone($tz)) {
-			$tz = Time::getClientTimezone();
+		if (!self::isValidTimezone($tz)) {
+			$tz = self::getClientTimezone();
 		}
 
 		$dt = new DateTime(null, new DateTimeZone($tz));
@@ -62,14 +66,15 @@ class Time {
 	/**
 	 * Returns a timestamp for 23:59:59 of the date of the time
 	 *
-	 * @param mixed  $ts     Date/time value
-	 * @param string $format Format of the return value
+	 * @param mixed       $ts     Date/time value
+	 * @param string      $format Format of the return value
+	 * @param string|null $tz     Timezone identifier
 	 *
 	 * @return string
 	 */
 	public static function getDayEnd($ts = 'now', $format = 'U', $tz = null) {
-		if (!Time::isValidTimezone($tz)) {
-			$tz = Time::getClientTimezone();
+		if (!self::isValidTimezone($tz)) {
+			$tz = self::getClientTimezone();
 		}
 
 		$dt = new DateTime(null, new DateTimeZone($tz));
@@ -82,14 +87,15 @@ class Time {
 	/**
 	 * Returns a timestamp for the first of the month at 0:00:00
 	 *
-	 * @param mixed  $ts     Date/time value
-	 * @param string $format Format of the return value
+	 * @param mixed       $ts     Date/time value
+	 * @param string      $format Format of the return value
+	 * @param string|null $tz     Timezone identifier
 	 *
 	 * @return string
 	 */
 	public static function getMonthStart($ts = 'now', $format = 'U', $tz = null) {
-		if (!Time::isValidTimezone($tz)) {
-			$tz = Time::getClientTimezone();
+		if (!self::isValidTimezone($tz)) {
+			$tz = self::getClientTimezone();
 		}
 
 		$dt = new DateTime(null, new DateTimeZone($tz));
@@ -114,8 +120,8 @@ class Time {
 	 * @return string
 	 */
 	public static function getMonthEnd($ts = 'now', $format = 'U', $tz = null) {
-		if (!Time::isValidTimezone($tz)) {
-			$tz = Time::getClientTimezone();
+		if (!self::isValidTimezone($tz)) {
+			$tz = self::getClientTimezone();
 		}
 
 		$dt = new DateTime(null, new DateTimeZone($tz));
@@ -137,14 +143,15 @@ class Time {
 	/**
 	 * Extracts time of the day timestamp
 	 *
-	 * @param mixed  $ts     Date/time value
-	 * @param string $format Format of the return value
+	 * @param mixed       $ts     Date/time value
+	 * @param string      $format Format of the return value
+	 * @param string|null $tz     Timezone identifier
 	 *
 	 * @return string
 	 */
 	public static function getTime($ts = 'now', $format = 'U', $tz = null) {
-		if (!Time::isValidTimezone($tz)) {
-			$tz = Time::getClientTimezone();
+		if (!self::isValidTimezone($tz)) {
+			$tz = self::getClientTimezone();
 		}
 
 		$dt = new DateTime(null, new DateTimeZone($tz));
@@ -160,36 +167,38 @@ class Time {
 	/**
 	 * Calculates a timestamp by extracting time from $ts_time and adding it to the day start on $ts_day
 	 *
-	 * @param mixed $ts_time Date/time string containing time information
-	 * @param mixed $ts_day  Date/time string containing day information
+	 * @param mixed       $ts_time Date/time string containing time information
+	 * @param mixed       $ts_day  Date/time string containing day information
+	 * @param string      $format  Format of the return value
+	 * @param string|null $tz      Timezone identifier
 	 *
 	 * @return int
 	 */
 	public static function getTimeOfDay($ts_time = 0, $ts_day = null, $format = 'U', $tz = null) {
-		if (!Time::isValidTimezone($tz)) {
-			$tz = Time::getClientTimezone();
+		if (!self::isValidTimezone($tz)) {
+			$tz = self::getClientTimezone();
 		}
 
-		$time = (int) Time::getTime($ts_time, 'U', $tz);
-		$day_start = (int) Time::getDayStart($ts_day, 'U', $tz);
+		$time = (int) self::getTime($ts_time, 'U', $tz);
+		$day_start = (int) self::getDayStart($ts_day, 'U', $tz);
 
 		$dt = new DateTime(null, new DateTimeZone($tz));
 
 		return $dt->setTimestamp($time + $day_start)->format($format);
-
 	}
 
 	/**
 	 * Returns day of week
 	 *
-	 * @param mixed  $ts     Date/time value
-	 * @param string $format Format of the return value
+	 * @param mixed       $ts     Date/time value
+	 * @param string|null $tz     Timezone identifier
+	 * @param string      $format Format of the return value
 	 *
 	 * @return string
 	 */
 	public static function getDayOfWeek($ts = 'now', $tz = null, $format = 'D') {
-		if (!Time::isValidTimezone($tz)) {
-			$tz = Time::getClientTimezone();
+		if (!self::isValidTimezone($tz)) {
+			$tz = self::getClientTimezone();
 		}
 
 		$dt = new DateTime(null, new DateTimeZone($tz));
@@ -201,13 +210,14 @@ class Time {
 	/**
 	 * Returns the week number if a month (e.g. 2nd week of the month)
 	 *
-	 * @param mixed $ts Date/time value
+	 * @param mixed       $ts Date/time value
+	 * @param string|null $tz Timezone identifier
 	 *
 	 * @return int
 	 */
 	public static function getWeekOfMonth($ts = 'now', $tz = null) {
-		if (!Time::isValidTimezone($tz)) {
-			$tz = Time::getClientTimezone();
+		if (!self::isValidTimezone($tz)) {
+			$tz = self::getClientTimezone();
 		}
 
 		$dt = new DateTime(null, new DateTimeZone($tz));
@@ -221,14 +231,16 @@ class Time {
 	/**
 	 * Returns nth position of a weekday in a month (e.g. 2nd Monday of a month)
 	 *
-	 * @param mixed $ts Date/time value
+	 * @param mixed       $ts Date/time value
+	 * @param string|null $tz Timezone identifier
 	 *
 	 * @return int
 	 */
 	public static function getWeekDayNthInMonth($ts = 'now', $tz = null) {
-		if (!Time::isValidTimezone($tz)) {
-			$tz = Time::getClientTimezone();
+		if (!self::isValidTimezone($tz)) {
+			$tz = self::getClientTimezone();
 		}
+
 		$dt = new DateTime(null, new DateTimeZone($tz));
 		(is_int($ts)) ? $dt->setTimestamp($ts) : $dt->modify($ts);
 
@@ -238,15 +250,17 @@ class Time {
 	/**
 	 * Checks if two timestamps fall on the same day of the week (e.g. Monday)
 	 *
-	 * @param int $ts1 First timestamp
-	 * @param int $ts2 Second timestamp
+	 * @param int         $ts1 First timestamp
+	 * @param int         $ts2 Second timestamp
+	 * @param string|null $tz  Timezone identifier
 	 *
 	 * @return bool
 	 */
 	public static function isOnSameDayOfWeek($ts1 = 0, $ts2 = 0, $tz = null) {
-		if (!Time::isValidTimezone($tz)) {
-			$tz = Time::getClientTimezone();
+		if (!self::isValidTimezone($tz)) {
+			$tz = self::getClientTimezone();
 		}
+
 		$dt1 = new DateTime(null, new DateTimeZone($tz));
 		$dt2 = new DateTime(null, new DateTimeZone($tz));
 
@@ -256,15 +270,17 @@ class Time {
 	/**
 	 * Checks if two timestamps fall on the same date of the month (e.g. 25th)
 	 *
-	 * @param int $ts1 First timestamp
-	 * @param int $ts2 Second timestamp
+	 * @param int         $ts1 First timestamp
+	 * @param int         $ts2 Second timestamp
+	 * @param string|null $tz  Timezone identifier
 	 *
 	 * @return bool
 	 */
 	public static function isOnSameDayOfMonth($ts1 = 0, $ts2 = 0, $tz = null) {
-		if (!Time::isValidTimezone($tz)) {
-			$tz = Time::getClientTimezone();
+		if (!self::isValidTimezone($tz)) {
+			$tz = self::getClientTimezone();
 		}
+
 		$dt1 = new DateTime(null, new DateTimeZone($tz));
 		$dt2 = new DateTime(null, new DateTimeZone($tz));
 
@@ -274,14 +290,15 @@ class Time {
 	/**
 	 * Checks if two timestamps fall on the same date of the year (e.g. February 25th)
 	 *
-	 * @param int $ts1 First timestamp
-	 * @param int $ts2 Second timestamp
+	 * @param int         $ts1 First timestamp
+	 * @param int         $ts2 Second timestamp
+	 * @param string|null $tz  Timezone identifier
 	 *
 	 * @return bool
 	 */
 	public static function isOnSameDayOfYear($ts1 = 0, $ts2 = 0, $tz = null) {
-		if (!Time::isValidTimezone($tz)) {
-			$tz = Time::getClientTimezone();
+		if (!self::isValidTimezone($tz)) {
+			$tz = self::getClientTimezone();
 		}
 
 		$dt1 = new DateTime(null, new DateTimeZone($tz));
@@ -293,14 +310,15 @@ class Time {
 	/**
 	 * Checks if two timestamps fall on the same week day of the month (e.g. 3rd Monday)
 	 *
-	 * @param int $ts1 First timestamp
-	 * @param int $ts2 Second timestamp
+	 * @param int         $ts1 First timestamp
+	 * @param int         $ts2 Second timestamp
+	 * @param string|null $tz  Timezone identifier
 	 *
 	 * @return bool
 	 */
 	public static function isOnSameWeekDayOfMonth($ts1 = 0, $ts2 = 0, $tz = null) {
-		if (!Time::isValidTimezone($tz)) {
-			$tz = Time::getClientTimezone();
+		if (!self::isValidTimezone($tz)) {
+			$tz = self::getClientTimezone();
 		}
 
 		if (!self::isOnSameDayOfWeek($ts1, $ts2, $tz)) {
@@ -329,9 +347,9 @@ class Time {
 	/**
 	 * Calculates the offset between timezones at a given date/time
 	 *
-	 * @param mixed  $ts       Date/time value
-	 * @param string $timezone Timezone of the date/time value
-	 *                         $param string $target_timezone Target timezone
+	 * @param mixed  $ts              Date/time value
+	 * @param string $timezone        Timezone of the date/time value
+	 * @param string $target_timezone Target timezone
 	 *
 	 * @return int
 	 */
@@ -359,10 +377,10 @@ class Time {
 	 * Returns a list of supported timezones
 	 * Triggers 'timezones','system' hook if $filter is set to true
 	 *
-	 * @param boolean $filter  If false, returns all supported PHP timezones
-	 * @param mixed   $format  Timezone label date format; if false, uses elgg_echo($tz_id)
-	 * @param mixed   $ts      Optional timestamp for label format
-	 * @param string  $sort_by 'alpha' or 'offset'
+	 * @param boolean $filter If false, returns all supported PHP timezones
+	 * @param mixed   $format Timezone label date format; if false, uses elgg_echo($tz_id)
+	 * @param mixed   $ts     Optional timestamp for label format
+	 * @param string  $sort   'alpha' or 'offset'
 	 *
 	 * @return array
 	 */
@@ -373,20 +391,20 @@ class Time {
 		$defaults = [];
 
 		foreach ($tz_ids as $tz_id) {
-			$defaults[$tz_id] = Time::getTimezoneLabel($tz_id, $format, $ts);
+			$defaults[$tz_id] = self::getTimezoneLabel($tz_id, $format, $ts);
 		}
 
 		switch ($sort) {
-			case self::TIMEZONE_SORT_ALPHA :
+			case self::TIMEZONE_SORT_ALPHA:
 				asort($defaults);
 				break;
-			case self::TIMEZONE_SORT_OFFSET :
+			case self::TIMEZONE_SORT_OFFSET:
 				uksort($defaults, [self, 'compareTimezonesByOffset']);
 				break;
 		}
 
 		if ($filter) {
-			return elgg_trigger_event_results('timezones', 'system', null, $defaults);
+			return elgg_trigger_plugin_hook('timezones', 'system', null, $defaults);
 		}
 
 		return $defaults;
@@ -400,17 +418,20 @@ class Time {
 		$timezones = [];
 		$tz_ids = array_keys(self::getTimezones(true, false, 'now', self::TIMEZONE_SORT_OFFSET));
 		foreach ($tz_ids as $tz_id) {
-			if ($tz_id == Time::UTC) {
+			if ($tz_id == self::UTC) {
 				continue;
 			}
-			$info = Time::getTimezoneInfo($tz_id);
+
+			$info = self::getTimezoneInfo($tz_id);
 			$cc = $info->country_code;
 			$abbr = $info->abbr;
 			if (!isset($timezones[$cc])) {
 				$timezones[$cc] = [];
 			}
+
 			$timezones[$cc][] = $info;
 		}
+
 		ksort($timezones);
 
 		return $timezones;
@@ -432,9 +453,10 @@ class Time {
 		$dt = new DateTime(null, $tz);
 
 		$region = explode('/', $tz_id);
-		if (sizeof($region) > 1) {
+		if (count($region) > 1) {
 			array_shift($region);
 		}
+
 		$region = str_replace('_', ' ', implode(', ', $region));
 
 		$tzinfo = new stdClass();
@@ -457,7 +479,7 @@ class Time {
 	/**
 	 * Checks if $timezone id is valid
 	 *
-	 * @param string $timezone
+	 * @param string $timezone Timezone identifier to validate
 	 *
 	 * @return bool
 	 */
@@ -507,6 +529,10 @@ class Time {
 
 	/**
 	 * Sorting callback function for comparing timezones by offset
+	 *
+	 * @param string $a First timezone identifier
+	 * @param string $b Second timezone identifier
+	 *
 	 * @return int
 	 */
 	public static function compareTimezonesByOffset($a, $b) {
@@ -566,7 +592,7 @@ class Time {
 	 *
 	 * @return string
 	 */
-	public static function toISO8601($ts = 'now', $timezone = Time::UTC, $target_timezone = Time::UTC) {
+	public static function toISO8601($ts = 'now', $timezone = self::UTC, $target_timezone = self::UTC) {
 		$dt = new DateTime(null, new DateTimeZone($timezone));
 		(is_int($ts)) ? $dt->setTimestamp($ts) : $dt->modify($ts);
 		$dt->setTimezone(new DateTimeZone($target_timezone));
@@ -600,6 +626,5 @@ class Time {
 		];
 
 		return strtr($format, $map);
-
 	}
 }

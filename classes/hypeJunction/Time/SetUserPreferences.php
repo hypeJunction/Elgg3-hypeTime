@@ -4,6 +4,9 @@ namespace hypeJunction\Time;
 
 use Elgg\Hook;
 
+/**
+ * Hook handler: saves user time/timezone preferences from the settings form.
+ */
 class SetUserPreferences {
 
 	/**
@@ -12,7 +15,7 @@ class SetUserPreferences {
 	 * @param Hook $hook Hook
 	 *
 	 * @return void
-	 * @throws \DatabaseException
+	 * @throws \Elgg\Exceptions\DatabaseException
 	 */
 	public function __invoke(Hook $hook) {
 
@@ -35,11 +38,10 @@ class SetUserPreferences {
 			'week_starts' => 'week:starts',
 		];
 
-		$plugin = elgg_get_plugin_from_id('hypetime');
 		foreach ($settings as $input => $setting) {
 			$value = get_input($input);
 			if (isset($value)) {
-				$plugin->setUserSetting($setting, $value, $user->guid);
+				$user->setPluginSetting('hypetime', $setting, $value);
 			}
 		}
 	}
