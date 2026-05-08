@@ -56,7 +56,7 @@ class Time {
 			$tz = self::getClientTimezone();
 		}
 
-		$dt = new DateTime(null, new DateTimeZone($tz));
+		$dt = new DateTime('now', new DateTimeZone($tz));
 		(is_int($ts)) ? $dt->setTimestamp($ts) : $dt->modify($ts);
 		$dt->setTime(0, 0, 0);
 
@@ -77,7 +77,7 @@ class Time {
 			$tz = self::getClientTimezone();
 		}
 
-		$dt = new DateTime(null, new DateTimeZone($tz));
+		$dt = new DateTime('now', new DateTimeZone($tz));
 		(is_int($ts)) ? $dt->setTimestamp($ts) : $dt->modify($ts);
 		$dt->setTime(23, 59, 59);
 
@@ -98,7 +98,7 @@ class Time {
 			$tz = self::getClientTimezone();
 		}
 
-		$dt = new DateTime(null, new DateTimeZone($tz));
+		$dt = new DateTime('now', new DateTimeZone($tz));
 		(is_int($ts)) ? $dt->setTimestamp($ts) : $dt->modify($ts);
 
 		$month = (int) $dt->format('m'); // month
@@ -124,7 +124,7 @@ class Time {
 			$tz = self::getClientTimezone();
 		}
 
-		$dt = new DateTime(null, new DateTimeZone($tz));
+		$dt = new DateTime('now', new DateTimeZone($tz));
 		(is_int($ts)) ? $dt->setTimestamp($ts) : $dt->modify($ts);
 
 		$dt->modify('+1 month');
@@ -154,7 +154,7 @@ class Time {
 			$tz = self::getClientTimezone();
 		}
 
-		$dt = new DateTime(null, new DateTimeZone($tz));
+		$dt = new DateTime('now', new DateTimeZone($tz));
 		(is_int($ts)) ? $dt->setTimestamp($ts) : $dt->modify($ts);
 
 		$time = (int) $dt->format('H') * self::SECONDS_IN_AN_HOUR;
@@ -182,7 +182,7 @@ class Time {
 		$time = (int) self::getTime($ts_time, 'U', $tz);
 		$day_start = (int) self::getDayStart($ts_day, 'U', $tz);
 
-		$dt = new DateTime(null, new DateTimeZone($tz));
+		$dt = new DateTime('now', new DateTimeZone($tz));
 
 		return $dt->setTimestamp($time + $day_start)->format($format);
 	}
@@ -201,7 +201,7 @@ class Time {
 			$tz = self::getClientTimezone();
 		}
 
-		$dt = new DateTime(null, new DateTimeZone($tz));
+		$dt = new DateTime('now', new DateTimeZone($tz));
 		(is_int($ts)) ? $dt->setTimestamp($ts) : $dt->modify($ts);
 
 		return $dt->format($format);
@@ -220,7 +220,7 @@ class Time {
 			$tz = self::getClientTimezone();
 		}
 
-		$dt = new DateTime(null, new DateTimeZone($tz));
+		$dt = new DateTime('now', new DateTimeZone($tz));
 		(is_int($ts)) ? $dt->setTimestamp($ts) : $dt->modify($ts);
 		$week_num_ts = (int) $dt->format('W');
 		$week_num_month_start = $dt->setTimestamp(self::getMonthStart($ts, 'U', $tz))->format('W');
@@ -241,7 +241,7 @@ class Time {
 			$tz = self::getClientTimezone();
 		}
 
-		$dt = new DateTime(null, new DateTimeZone($tz));
+		$dt = new DateTime('now', new DateTimeZone($tz));
 		(is_int($ts)) ? $dt->setTimestamp($ts) : $dt->modify($ts);
 
 		return ceil($dt->format('j') / 7);
