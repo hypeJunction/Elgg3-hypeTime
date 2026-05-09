@@ -91,3 +91,7 @@ container binding lives in hypepost.
 - `start.php` and `manifest.xml` removed; all registration is declarative
 - `Bootstrap::init()` replaces the init event handler
 - `SetUserPreferences` was rewritten to use `ElggUser::setPluginSetting()` directly
+
+## Seeding
+
+No seeder required. This plugin owns no entity types, subtypes, or persistent relationship schemas — it is a pure UI/utility/admin plugin with no persisted entity surface of its own.
