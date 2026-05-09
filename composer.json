@@ -2,7 +2,7 @@
 	"name": "hypejunction/hypetime",
 	"type": "elgg-plugin",
 	"description": "Utilities for working with dates and time",
-	"homepage": "http://hypejunction.com",
+	"homepage": "https://github.com/hypeJunction/Elgg3-hypeTime",
 	"keywords": [
 		"elgg",
 		"plugin",
@@ -13,7 +13,7 @@
 	"authors": [
 		{
 			"name": "Ismayil Khayredinov",
-			"email": "info@hypejunction.com"
+			"email": "ismayil.khayredinov@gmail.com"
 		}
 	],
 	"extra": {
