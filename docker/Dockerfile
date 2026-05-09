@@ -36,7 +36,7 @@ WORKDIR /var/www/html
 # Create Elgg data directory
 RUN mkdir -p /var/www/data && chown www-data:www-data /var/www/data
 
-# Install Elgg 4.x and dev tools
+# Install Elgg 6.x and dev tools
 COPY elgg-composer.json /var/www/html/composer.json
 RUN cd /var/www/html && composer install --no-interaction --prefer-dist
 
