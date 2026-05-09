@@ -1,40 +1,40 @@
 {
-	"name": "hypejunction/hypetime",
-	"type": "elgg-plugin",
-	"description": "Utilities for working with dates and time",
-	"homepage": "https://github.com/hypeJunction/Elgg3-hypeTime",
-	"keywords": [
-		"elgg",
-		"plugin",
-		"time",
-		"date"
-	],
-	"license": "proprietary",
-	"authors": [
-		{
-			"name": "Ismayil Khayredinov",
-			"email": "ismayil.khayredinov@gmail.com"
-		}
-	],
-	"extra": {
-		"installer-name": "hypetime",
-		"elgg-plugin": {
-			"id": "hypetime"
-		}
-	},
-	"require": {
-		"php": ">=8.1",
-		"composer/installers": "^2.0",
-		"elgg/elgg": "^4.0"
-	},
-	"autoload": {
-		"psr-4": {
-			"hypeJunction\\": "classes/hypeJunction/"
-		}
-	},
-	"config": {
-		"allow-plugins": {
-			"composer/installers": true
-		}
-	}
+    "name": "hypejunction/hypetime",
+    "type": "elgg-plugin",
+    "description": "Utilities for working with dates and time",
+    "homepage": "https://github.com/hypeJunction/Elgg3-hypeTime",
+    "keywords": [
+        "elgg",
+        "plugin",
+        "time",
+        "date"
+    ],
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Ismayil Khayredinov",
+            "email": "ismayil.khayredinov@gmail.com"
+        }
+    ],
+    "extra": {
+        "installer-name": "hypetime",
+        "elgg-plugin": {
+            "id": "hypetime"
+        }
+    },
+    "require": {
+        "php": ">=8.1",
+        "composer/installers": "^2.0",
+        "elgg/elgg": "^4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "hypeJunction\\": "classes/hypeJunction/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true
+        }
+    }
 }
