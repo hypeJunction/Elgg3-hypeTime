@@ -4,7 +4,7 @@ namespace hypeJunction\Time;
 
 use DateTime;
 use DateTimeZone;
-use Elgg\Hook;
+use Elgg\Event;
 use Elgg\Request;
 use ElggEntity;
 use hypeJunction\Fields\Collection;
@@ -17,13 +17,13 @@ class AddFormField {
 	/**
 	 * Add slug field
 	 *
-	 * @param Hook $hook Hook
+	 * @param Event $event Event
 	 *
 	 * @return mixed
 	 */
-	public function __invoke(Hook $hook) {
+	public function __invoke(Event $event) {
 
-		$fields = $hook->getValue();
+		$fields = $event->getValue();
 		/* @var $field Collection */
 
 		$fields->add('calendar_start', new CalendarStartField([

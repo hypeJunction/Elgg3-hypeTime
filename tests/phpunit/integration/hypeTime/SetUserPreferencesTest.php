@@ -2,8 +2,8 @@
 
 namespace hypeJunction\Time;
 
+use Elgg\Event;
 use Elgg\IntegrationTestCase;
-use Elgg\HooksRegistrationService\Hook;
 
 class SetUserPreferencesTest extends IntegrationTestCase {
 
@@ -27,9 +27,9 @@ class SetUserPreferencesTest extends IntegrationTestCase {
 	}
 
 	private function invokeHandler(): void {
-		$hook = new Hook(elgg(), 'usersettings:save', 'user', null, []);
+		$event = new Event(elgg(), 'usersettings:save', 'user', null, []);
 		$handler = new SetUserPreferences();
-		$handler($hook);
+		$handler($event);
 	}
 
 	public function testHandlerSavesTimeFormat(): void {

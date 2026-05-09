@@ -404,7 +404,7 @@ class Time {
 		}
 
 		if ($filter) {
-			return elgg_trigger_plugin_hook('timezones', 'system', null, $defaults);
+			return elgg_trigger_event_results('timezones', 'system', [], $defaults);
 		}
 
 		return $defaults;

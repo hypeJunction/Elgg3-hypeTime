@@ -48,7 +48,7 @@ return [
 		],
 	],
 
-	'hooks' => [
+	'events' => [
 		'usersettings:save' => [
 			'user' => [
 				\hypeJunction\Time\SetUserPreferences::class => [],

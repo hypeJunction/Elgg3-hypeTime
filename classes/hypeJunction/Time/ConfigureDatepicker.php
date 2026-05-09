@@ -2,7 +2,7 @@
 
 namespace hypeJunction\Time;
 
-use Elgg\Hook;
+use Elgg\Event;
 use hypeJunction\Time;
 
 /**
@@ -13,13 +13,13 @@ class ConfigureDatepicker {
 	/**
 	 * Configure datepicker
 	 *
-	 * @param Hook $hook Hook
+	 * @param Event $event Event
 	 *
 	 * @return mixed
 	 */
-	public function __invoke(Hook $hook) {
+	public function __invoke(Event $event) {
 
-		$vars = $hook->getValue();
+		$vars = $event->getValue();
 
 		$options = (array) elgg_extract('datepicker_options', $vars, []);
 

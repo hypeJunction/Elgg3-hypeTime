@@ -2,22 +2,22 @@
 
 namespace hypeJunction\Time;
 
-use Elgg\Hook;
+use Elgg\Event;
 
 /**
- * Hook handler: saves user time/timezone preferences from the settings form.
+ * Event handler: saves user time/timezone preferences from the settings form.
  */
 class SetUserPreferences {
 
 	/**
 	 * Save user settings
 	 *
-	 * @param Hook $hook Hook
+	 * @param Event $event Event
 	 *
 	 * @return void
 	 * @throws \Elgg\Exceptions\DatabaseException
 	 */
-	public function __invoke(Hook $hook) {
+	public function __invoke(Event $event) {
 
 		$user_guid = get_input('guid');
 
