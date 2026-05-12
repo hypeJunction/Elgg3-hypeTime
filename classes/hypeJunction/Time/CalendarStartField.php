@@ -11,7 +11,12 @@ use Symfony\Component\HttpFoundation\ParameterBag;
 
 class CalendarStartField extends Field {
 
-	public function isVisible(ElggEntity $entity, $context = null) {
+	/**
+     * @param ElggEntity $entity
+     * @param mixed $context
+     * @return mixed
+     */
+    public function isVisible(ElggEntity $entity, $context = null) {
 		$params = [
 			'entity' => $entity,
 		];
@@ -30,7 +35,12 @@ class CalendarStartField extends Field {
 		return parent::isVisible($entity, $context);
 	}
 
-	public function raw(Request $request, ElggEntity $entity) {
+	/**
+     * @param Request $request
+     * @param ElggEntity $entity
+     * @return mixed
+     */
+    public function raw(Request $request, ElggEntity $entity) {
 		$value = $request->getParam('calendar_start', []);
 		$timezone = elgg_extract('timezone', $value, get_input('timezone'));
 		$tz = (new DateTime())->getTimezone();
@@ -50,7 +60,12 @@ class CalendarStartField extends Field {
 		return new DateTime($time, $tz);
 	}
 
-	public function save(ElggEntity $entity, ParameterBag $parameters) {
+	/**
+     * @param ElggEntity $entity
+     * @param ParameterBag $parameters
+     * @return mixed
+     */
+    public function save(ElggEntity $entity, ParameterBag $parameters) {
 		$value = $parameters->get($this->name);
 
 		$svc = elgg()->{'posts.calendar'};
@@ -60,7 +75,11 @@ class CalendarStartField extends Field {
 		return $svc->setCalendarStart($entity, $value);
 	}
 
-	public function retrieve(ElggEntity $entity) {
+	/**
+     * @param ElggEntity $entity
+     * @return mixed
+     */
+    public function retrieve(ElggEntity $entity) {
 		$svc = elgg()->{'posts.calendar'};
 
 		/* @var $svc CalendarService */

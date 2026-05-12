@@ -8,7 +8,12 @@ use Symfony\Component\HttpFoundation\ParameterBag;
 
 class TimezoneField extends Field {
 
-	public function isVisible(ElggEntity $entity, $context = null) {
+	/**
+     * @param ElggEntity $entity
+     * @param mixed $context
+     * @return mixed
+     */
+    public function isVisible(ElggEntity $entity, $context = null) {
 		$params = [
 			'entity' => $entity,
 		];
@@ -27,11 +32,19 @@ class TimezoneField extends Field {
 		return parent::isVisible($entity, $context);
 	}
 
-	public function save(ElggEntity $entity, ParameterBag $parameters) {
+	/**
+     * @param ElggEntity $entity
+     * @param ParameterBag $parameters
+     */
+    public function save(ElggEntity $entity, ParameterBag $parameters) {
 		// The value is set with one of the other fields
 	}
 
-	public function retrieve(ElggEntity $entity) {
+	/**
+     * @param ElggEntity $entity
+     * @return mixed
+     */
+    public function retrieve(ElggEntity $entity) {
 		$svc = elgg()->{'posts.calendar'};
 
 		/* @var $svc CalendarService */
