@@ -45,14 +45,14 @@ class CalendarEndField extends Field {
 	 */
 	public function raw(Request $request, ElggEntity $entity) {
 		$value = $request->getParam('calendar_end', []);
-		$timezone = elgg_extract('timezone', $value, get_input('timezone'));
+		$timezone = \elgg_extract('timezone', $value, get_input('timezone'));
 		$tz = (new DateTime())->getTimezone();
 		if ($timezone) {
 			$tz = new DateTimeZone($timezone);
 		}
 
-		$date_str = elgg_extract('date', $value);
-		$time_str = elgg_extract('time', $value);
+		$date_str = \elgg_extract('date', $value);
+		$time_str = \elgg_extract('time', $value);
 
 		if (!$date_str || !$time_str) {
 			return null;

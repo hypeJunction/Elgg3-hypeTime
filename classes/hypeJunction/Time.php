@@ -404,7 +404,7 @@ class Time {
 		}
 
 		if ($filter) {
-			return elgg_trigger_event_results('timezones', 'system', [], $defaults);
+			return \elgg_trigger_event_results('timezones', 'system', [], $defaults);
 		}
 
 		return $defaults;
@@ -463,13 +463,13 @@ class Time {
 		$tzinfo->id = $tz_id;
 		$tzinfo->abbr = $dt->format('T');
 		$tzinfo->country_code = $country_code;
-		$tzinfo->country = elgg_echo("country:$country_code");
+		$tzinfo->country = \elgg_echo("country:$country_code");
 		$tzinfo->region = $region;
 		$tzinfo->offset = $dt->getOffset();
 		$tzinfo->gmt = $dt->format('\(\G\M\TP\)');
 
 		$name = "timezone:$tzinfo->country_code:$tzinfo->abbr";
-		$name_tr = elgg_echo($name);
+		$name_tr = \elgg_echo($name);
 		$tzinfo->name = ($name == $name_tr) ? $tzinfo->abbr : $name_tr;
 		$tzinfo->label = "$tzinfo->gmt $tzinfo->name - $tzinfo->region";
 
@@ -524,7 +524,7 @@ class Time {
 			return $dt->format($format);
 		}
 
-		return elgg_echo($tz_id);
+		return \elgg_echo($tz_id);
 	}
 
 	/**
@@ -559,14 +559,14 @@ class Time {
 		$preferred = [];
 
 		if ($entity == null) {
-			$entity = elgg_get_logged_in_user_entity();
+			$entity = \elgg_get_logged_in_user_entity();
 		}
 
 		if ($entity instanceof ElggUser) {
-			$preferred[] = elgg_get_plugin_user_setting('timezone', $entity->guid, 'hypetime');
+			$preferred[] = \elgg_get_plugin_user_setting('timezone', $entity->guid, 'hypetime');
 		}
 
-		$preferred[] = elgg_get_plugin_setting('timezone', 'hypetime');
+		$preferred[] = \elgg_get_plugin_setting('timezone', 'hypetime');
 
 		if (defined('ELGG_SITE_TIMEZONE')) {
 			$preferred[] = ELGG_SITE_TIMEZONE;

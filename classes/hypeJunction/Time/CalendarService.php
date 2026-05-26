@@ -38,7 +38,7 @@ class CalendarService {
 		$dt->setTimezone(new DateTimeZone(Time::UTC));
 		$entity->calendar_start_utc = $dt->getTimestamp();
 
-		return elgg_trigger_event('update', 'object:calendar_start', $entity);
+		return \elgg_trigger_event('update', 'object:calendar_start', $entity);
 	}
 
 	/**
@@ -67,7 +67,7 @@ class CalendarService {
 		$dt->setTimezone(new DateTimeZone(Time::UTC));
 		$entity->calendar_end_utc = $dt->getTimestamp();
 
-		return elgg_trigger_event('update', 'object:calendar_end', $entity);
+		return \elgg_trigger_event('update', 'object:calendar_end', $entity);
 	}
 
 	/**
