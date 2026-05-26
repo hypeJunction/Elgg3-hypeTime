@@ -21,14 +21,14 @@ class ConfigureDatepicker {
 
 		$vars = $hook->getValue();
 
-		$options = (array) elgg_extract('datepicker_options', $vars, []);
+		$options = (array) \elgg_extract('datepicker_options', $vars, []);
 
 		if (!isset($options['firstDay'])) {
-			$user = elgg_get_logged_in_user_entity();
+			$user = \elgg_get_logged_in_user_entity();
 			if ($user) {
-				$setting = elgg_get_plugin_user_setting('week:starts', $user->guid, 'hypetime');
+				$setting = \elgg_get_plugin_user_setting('week:starts', $user->guid, 'hypetime');
 			} else {
-				$setting = elgg_get_plugin_setting('week:starts', 'hypetime');
+				$setting = \elgg_get_plugin_setting('week:starts', 'hypetime');
 			}
 
 			if ($setting === Time::SUNDAY) {

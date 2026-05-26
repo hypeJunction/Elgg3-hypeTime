@@ -24,7 +24,7 @@ class SetUserPreferences {
 		if ($user_guid) {
 			$user = get_user($user_guid);
 		} else {
-			$user = elgg_get_logged_in_user_entity();
+			$user = \elgg_get_logged_in_user_entity();
 		}
 
 		if (!$user) {

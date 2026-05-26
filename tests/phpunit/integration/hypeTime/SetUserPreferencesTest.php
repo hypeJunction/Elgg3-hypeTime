@@ -16,11 +16,11 @@ class SetUserPreferencesTest extends IntegrationTestCase {
 
 	public function up(): void {
 		$this->user = $this->createUser();
-		elgg_get_session()->setLoggedInUser($this->user);
+		\elgg_get_session()->setLoggedInUser($this->user);
 	}
 
 	public function down(): void {
-		elgg_get_session()->removeLoggedInUser();
+		\elgg_get_session()->removeLoggedInUser();
 		if ($this->user) {
 			$this->user->delete();
 		}
@@ -65,7 +65,7 @@ class SetUserPreferencesTest extends IntegrationTestCase {
 	}
 
 	public function testHandlerDoesNothingWithoutUser(): void {
-		elgg_get_session()->removeLoggedInUser();
+		\elgg_get_session()->removeLoggedInUser();
 
 		set_input('format_time', 'H:i');
 		// Should not throw — handler gracefully exits when user is not found
